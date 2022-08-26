@@ -1,0 +1,19 @@
+
+# Create User
+post http://localhost:3000/user.json
+Content-Type: application/json
+
+{
+  "name": "Esther",
+  "password": "password"
+}
+
+###
+#session create (login)
+post http://localhost:3000/sessions.json
+Content-Type: application/json
+
+{
+  "name":"Esther",
+  "password": "password"
+}
