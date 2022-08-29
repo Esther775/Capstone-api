@@ -1,4 +1,6 @@
 
+jwt = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjE4NjQxNDd9.eN3DTc5kDOtxCEYn6f59NnZddqqJ1YKrD_tk_l5dN_I"
+###
 # Create User
 post http://localhost:3000/user.json
 Content-Type: application/json
@@ -16,4 +18,25 @@ Content-Type: application/json
 {
   "name":"Esther",
   "password": "password"
+}
+
+###
+
+#Warehouse index:
+get http://localhost:3000/warehouses.json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjE4NjQxNDd9.eN3DTc5kDOtxCEYn6f59NnZddqqJ1YKrD_tk_l5dN_I
+
+###
+
+#Shipment create
+post http://localhost:3000/shipments.json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjE4NjQxNDd9.eN3DTc5kDOtxCEYn6f59NnZddqqJ1YKrD_tk_l5dN_I
+
+{
+  "book_id": 1,
+  "from_warehouse_id": "2",
+  "to_warehouse_id": "3",
+  "quantity": 10
 }
