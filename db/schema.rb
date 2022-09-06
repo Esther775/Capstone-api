@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_26_190144) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_02_173440) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_26_190144) do
   end
 
   create_table "inventories", force: :cascade do |t|
-    t.integer "books_id"
+    t.integer "book_id"
     t.integer "warehouse_id"
     t.integer "current_inventory"
     t.datetime "created_at", null: false

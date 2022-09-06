@@ -1,5 +1,5 @@
 
-jwt = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjE4NjQxNDd9.eN3DTc5kDOtxCEYn6f59NnZddqqJ1YKrD_tk_l5dN_I"
+@estherjwt = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjIyMjM4NTd9.GZFdH1k4V8fKFrEyeEYecv1ieUwiXPH_IpnsVh3RFmU"
 ###
 # Create User
 post http://localhost:3000/user.json
@@ -25,18 +25,17 @@ Content-Type: application/json
 #Warehouse index:
 get http://localhost:3000/warehouses.json
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjE4NjQxNDd9.eN3DTc5kDOtxCEYn6f59NnZddqqJ1YKrD_tk_l5dN_I
 
 ###
 
 #Shipment create
 post http://localhost:3000/shipments.json
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjE4NjQxNDd9.eN3DTc5kDOtxCEYn6f59NnZddqqJ1YKrD_tk_l5dN_I
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjIzNDM0NTh9.s14iGQKaJx8Npv9nMU2hbE8MF9W9EZ-v5GbSD2whTh0
 
 {
   "book_id": 1,
-  "from_warehouse_id": "2",
-  "to_warehouse_id": "3",
-  "quantity": 10
+  "from_warehouse_id": "1",
+  "to_warehouse_id": "2",
+  "quantity": 0
 }
