@@ -19,7 +19,32 @@ class ShipmentController < ApplicationController
 
       render json: shipment.as_json
     else
-      render json: errors.full_messages
+      render json: shipment.errors.full_messages
     end
+  end
+
+  def index
+    shipment = Shipment.all.order("created_at DESC")
+    # shipment = Shipment.where(user_id: current_user)
+
+    render json: shipment
+  end
+
+  def update
+    shipment = Shipment.find_by(id: params[:id])
+
+    shipment.book_id = params[:book_id]
+    shipment.to_warehouse_id = params[:to_warehouse_id]
+    shipment.from_warehouse_id = params[:from_warehouse_id]
+    shipment.quantity = params[:quantity]
+
+    shipment.save
+    render json: shipment
+  end
+
+  def show
+    shipment = Shipment.find_by(id: params[:id])
+
+    render json: shipment
   end
 end
