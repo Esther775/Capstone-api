@@ -1,5 +1,5 @@
 
-@estherjwt = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjI4Mjc4NTd9.4aDdttGEqj65hpFPxgcUV4ARtlrBGy3xzjDBt15Z7GY"
+@estherjwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjM0MzcxNDN9.XNqepUHm7GtuWLumBjwEhg7ieDfJYaTITwB2dNXz9EM
 ###
 # Create User
 post http://localhost:3000/user.json
@@ -31,7 +31,7 @@ Content-Type: application/json
 #Shipment create
 post http://localhost:3000/shipments.json
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjI4Mjc4NTd9.4aDdttGEqj65hpFPxgcUV4ARtlrBGy3xzjDBt15Z7GY
+Authorization: Bearer {{estherjwt}}
 
 {
   "book_id": 3,
@@ -43,20 +43,25 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjI4Mjc4N
 ###
 get http://localhost:3000/shipments.json
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjI4Mjc4NTd9.4aDdttGEqj65hpFPxgcUV4ARtlrBGy3xzjDBt15Z7GY
+
 
 ###
-patch http://localhost:3000/shipments/86
+patch http://localhost:3000/shipments/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjI4Mjc4NTd9.4aDdttGEqj65hpFPxgcUV4ARtlrBGy3xzjDBt15Z7GY
+Authorization: Bearer {{estherjwt}}
 
 {
   "book_id": 3,
   "from_warehouse_id": "1",
   "to_warehouse_id": "2",
-  "quantity": 1005
+  "quantity": 21
 }
 
 ###
 
-get http://localhost:3000/shipments/86
+# get http://localhost:3000/shipments/86
+
+###
+#Inventory Show
+
+get http://localhost:3000/inventory/:id

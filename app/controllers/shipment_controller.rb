@@ -32,14 +32,17 @@ class ShipmentController < ApplicationController
 
   def update
     shipment = Shipment.find_by(id: params[:id])
-
+    shipment.user_id = current_user.id
     shipment.book_id = params[:book_id]
     shipment.to_warehouse_id = params[:to_warehouse_id]
     shipment.from_warehouse_id = params[:from_warehouse_id]
     shipment.quantity = params[:quantity]
 
-    shipment.save
-    render json: shipment
+    if shipment.save
+      render json: shipment
+    else
+      render json: shipment.errors.full_messages
+    end
   end
 
   def show

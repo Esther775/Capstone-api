@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   get "/shipments" => "shipment#index"
   patch "/shipments/:id" => "shipment#update"
   get "/shipments/:id" => "shipment#show"
+  get "/inventory/:id" => "inventories#show"
 end
