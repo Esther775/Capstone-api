@@ -6,6 +6,7 @@ class ShipmentController < ApplicationController
       from_warehouse_id: params[:from_warehouse_id],
       to_warehouse_id: params[:to_warehouse_id],
       quantity: params[:quantity],
+      comment: params[:comment],
     )
 
     if shipment.save
