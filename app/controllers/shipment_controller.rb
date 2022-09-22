@@ -40,7 +40,15 @@ class ShipmentController < ApplicationController
     shipment.quantity = params[:quantity]
 
     if shipment.save
-      render json: shipment
+      inventory = Inventory.find_by(warehouse_id: shipment.from_warehouse_id, book_id: shipment.book_id)
+      inventory.current_inventory -= shipment.quantity
+      inventory.save
+
+      inventory = Inventory.find_by(warehouse_id: shipment.to_warehouse_id, book_id: shipment.book_id)
+      inventory.current_inventory += shipment.quantity
+      inventory.save
+
+      render json: shipment.as_json
     else
       render json: shipment.errors.full_messages
     end
