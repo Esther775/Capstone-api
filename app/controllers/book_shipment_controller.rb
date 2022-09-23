@@ -1,0 +1,2 @@
+class BookShipmentController < ApplicationController
+end

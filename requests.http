@@ -1,5 +1,5 @@
 
-@estherjwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE2NjM5NTA4MDB9.fXHO-_5wnhm4qp8mDi9Sj6ncqa7bvOul9tl_DBfGfN0
+@estherjwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NjM5NzU3MzV9.RJnlSUDoAKlGEQ_DtEjT_h-aN3UDtjOs1_xT_osRltU
 ###
 # Create User
 post http://localhost:3000/user.json
@@ -34,11 +34,12 @@ Content-Type: application/json
 Authorization: Bearer {{estherjwt}}
 
 {
-  "book_id": 3,
   "from_warehouse_id": "1",
   "to_warehouse_id": "2",
-  "quantity": 0
-}
+  "quantity": 2,
+  "book_id": [3, 2],
+  "shipment_id": 1
+  }
 
 ###
 get http://localhost:3000/shipments.json

@@ -1,6 +1,4 @@
 class Shipment < ApplicationRecord
-  belongs_to :book
+  has_many :book_shipments
   belongs_to :user
-
-  
 end
