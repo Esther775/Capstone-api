@@ -8,12 +8,15 @@ class ShipmentController < ApplicationController
     )
     shipment.save
 
-    params[:book_id].each do |individual_book|
+    params[:books].each do |individual_book|
       book = BookShipment.new(
-        book_id: individual_book,
-        quantity: params[:quantity],
+        book_id: individual_book["book_id"],
+        quantity: individual_book["quantity"],
         shipment_id: shipment.id,
       )
+
+      p "book ******************************************************************************************"
+      p book
       book.save
 
       inventory = Inventory.find_by(warehouse_id: shipment.from_warehouse_id, book_id: book.book_id)
@@ -30,16 +33,13 @@ class ShipmentController < ApplicationController
     books_in_shipment = BookShipment.where(shipment_id: shipment.id)
 
     render json: { shipment: shipment.as_json, books: books_in_shipment.as_json }
-    #Right now I am nont renndering the inventory bc I dont think its needed in the shipments create
   end
 
-  #How do I put this in a conditional so that the the shipment will only create if all peices go through? Because I need to shipment.save before book_shipment.new, because I need the shipment.id
-
   def index
-    shipment = Shipment.all.order("created_at DESC")
-    # shipment = Shipment.where(user_id: current_user)
+    @shipments = Shipment.all.order("created_at DESC")
+    render template: "shipments/index"
 
-    render json: shipment
+    # shipment = Shipment.where(user_id: current_user)
   end
 
   def update
@@ -66,8 +66,10 @@ class ShipmentController < ApplicationController
   end
 
   def show
-    shipment = Shipment.find_by(id: params[:id])
+    # books_in_shipment = BookShipment.all.each do |shipment|
+    # end
+    # books_in_shipment = BooksShipment.all
 
-    render json: shipment
+    # render json: {book: books_in_shipment }
   end
 end

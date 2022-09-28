@@ -1,0 +1,10 @@
+@shipments.map do |shipment|
+  {
+    id: shipment.id,
+    book_shipment: shipment.book_shipments.map do |book_shipment|
+      { book: book_shipment.book,
+       quantity: book_shipment.quantity }
+    end,
+
+  }
+end

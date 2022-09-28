@@ -1,0 +1,5 @@
+{
+  id: @shipment.id,
+  created_at: @shipment.created_at,
+  updated_at: @shipment.updated_at
+}
