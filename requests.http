@@ -1,5 +1,5 @@
 
-@estherjwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NjQ0NjgzNDN9.QS7Q_8z7e5Lm1BDIZyLi2_cj7AZKpn89lt6uxWyy40M
+@estherjwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NjQ1NTU2ODN9.VqfprX5sAx9qMdnB0nSYQRiDWQvR7uhVww7CSLUfQmY
 ###
 # Create User
 post http://localhost:3000/user.json
@@ -36,7 +36,7 @@ Authorization: Bearer {{estherjwt}}
 {
   "from_warehouse_id": "1",
   "to_warehouse_id": "2",
-  "books": [{"book_id": 2, "quantity":1 },{"book_id": 1, "quantity":1 }],
+  "books": [{"book_id": 1, "quantity":2 },{"book_id": 2, "quantity":3 }],
   "shipment_id": 1
   }
 
@@ -46,12 +46,12 @@ Content-Type: application/json
 
 
 ###shipment update:
-patch http://localhost:3000/shipments/100
+patch http://localhost:3000/shipments/131
 Content-Type: application/json
 Authorization: Bearer {{estherjwt}}
 
 {
-  "books": [{"book_id": 2, "quantity":1 },{"book_id": 1, "quantity":1 }],
+  "books": [{"book_id": 1, "quantity":4},{"book_id": 2, "quantity":6 }],
   "from_warehouse_id": "1",
   "to_warehouse_id": "2",
   "quantity": 21
@@ -64,4 +64,4 @@ Authorization: Bearer {{estherjwt}}
 ###
 #Inventory Show
 
-get http://localhost:3000/inventory/:id
+get http://localhost:3000/inventory/127

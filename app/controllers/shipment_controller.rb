@@ -40,27 +40,45 @@ class ShipmentController < ApplicationController
   end
 
   def update
+    #find the shipment
     shipment = Shipment.find_by(id: params[:id])
     shipment.user_id = current_user.id
     shipment.to_warehouse_id = params[:to_warehouse_id]
     shipment.from_warehouse_id = params[:from_warehouse_id]
 
+    #delete the books in the shipment and calculate stock
+
+    shipment.book_shipments.each do |book|
+      inventory = Inventory.find_by(warehouse_id: shipment.from_warehouse_id, book_id: book.book_id)
+      inventory.current_inventory += book.quantity
+
+      inventory.save
+
+      inventory = Inventory.find_by(warehouse_id: shipment.to_warehouse_id, book_id: book.book_id)
+      inventory.current_inventory -= book.quantity
+
+      inventory.save
+    end
+
+    shipment.book_shipments.destroy
+
     params[:books].each do |individual_book|
-      individual_book.book_id = params[:book_id],
-      individual_book.quantity = params[:quantity]
+      book = BookShipment.new(
+        book_id: individual_book["book_id"],
+        quantity: individual_book["quantity"],
+        shipment_id: shipment.id,
+      )
+      book.save
 
-      if shipment.save
-        inventory = Inventory.find_by(warehouse_id: shipment.from_warehouse_id, book_id: shipment.book_id)
-        inventory.current_inventory -= shipment.quantity
-        inventory.save
+      inventory = Inventory.find_by(warehouse_id: shipment.from_warehouse_id, book_id: book.book_id)
+      inventory.current_inventory -= book.quantity
 
-        inventory = Inventory.find_by(warehouse_id: shipment.to_warehouse_id, book_id: shipment.book_id)
-        inventory.current_inventory += shipment.quantity
-        inventory.save
-        render json: shipment.as_json
-      else
-        render json: shipment.errors.full_messages
-      end
+      inventory.save
+
+      inventory = Inventory.find_by(warehouse_id: shipment.to_warehouse_id, book_id: book.book_id)
+      inventory.current_inventory += book.quantity
+
+      inventory.save
     end
   end
 
