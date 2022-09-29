@@ -1,5 +1,9 @@
 {
   id: @shipment.id,
-  created_at: @shipment.created_at,
-  updated_at: @shipment.updated_at
+  from_warehouse_id: @shipment.from_warehouse_id,
+  to_warehouse_id: @shipment.to_warehouse_id,
+  comment: @shipment.comment,
+
+  books: @shipment.book_shipments,
+
 }

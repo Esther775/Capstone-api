@@ -57,11 +57,10 @@ Authorization: Bearer {{estherjwt}}
   "quantity": 21
 }
 
-###
+###Shipment show:
 
-# get http://localhost:3000/shipments/86
+get http://localhost:3000/shipments/127.json
 
 ###
 #Inventory Show
-
 get http://localhost:3000/inventory/127

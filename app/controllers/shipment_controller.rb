@@ -83,10 +83,8 @@ class ShipmentController < ApplicationController
   end
 
   def show
-    # books_in_shipment = BookShipment.all.each do |shipment|
-    # end
-    # books_in_shipment = BooksShipment.all
+    @shipment = Shipment.find_by(id: params[:id])
 
-    # render json: {book: books_in_shipment }
+    render template: "shipments/show"
   end
 end
