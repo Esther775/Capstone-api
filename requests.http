@@ -45,13 +45,13 @@ get http://localhost:3000/shipments.json
 Content-Type: application/json
 
 
-###
-patch http://localhost:3000/shipments/1
+###shipment update:
+patch http://localhost:3000/shipments/100
 Content-Type: application/json
 Authorization: Bearer {{estherjwt}}
 
 {
-  "book_id": 2,
+  "books": [{"book_id": 2, "quantity":1 },{"book_id": 1, "quantity":1 }],
   "from_warehouse_id": "1",
   "to_warehouse_id": "2",
   "quantity": 21

@@ -1,9 +1,13 @@
 @shipments.map do |shipment|
   {
     id: shipment.id,
+    from_warehouse_id: shipment.from_warehouse_id,
+    to_warehouse_id: shipment.to_warehouse_id,
+    comment: shipment.comment,
+
     book_shipment: shipment.book_shipments.map do |book_shipment|
       { book: book_shipment.book,
-       quantity: book_shipment.quantity }
+        quantity: book_shipment.quantity }
     end,
 
   }

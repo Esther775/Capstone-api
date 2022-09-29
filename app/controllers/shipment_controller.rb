@@ -14,9 +14,6 @@ class ShipmentController < ApplicationController
         quantity: individual_book["quantity"],
         shipment_id: shipment.id,
       )
-
-      p "book ******************************************************************************************"
-      p book
       book.save
 
       inventory = Inventory.find_by(warehouse_id: shipment.from_warehouse_id, book_id: book.book_id)
@@ -45,23 +42,25 @@ class ShipmentController < ApplicationController
   def update
     shipment = Shipment.find_by(id: params[:id])
     shipment.user_id = current_user.id
-    shipment.book_id = params[:book_id]
     shipment.to_warehouse_id = params[:to_warehouse_id]
     shipment.from_warehouse_id = params[:from_warehouse_id]
-    shipment.quantity = params[:quantity]
 
-    if shipment.save
-      inventory = Inventory.find_by(warehouse_id: shipment.from_warehouse_id, book_id: shipment.book_id)
-      inventory.current_inventory -= shipment.quantity
-      inventory.save
+    params[:books].each do |individual_book|
+      individual_book.book_id = params[:book_id],
+      individual_book.quantity = params[:quantity]
 
-      inventory = Inventory.find_by(warehouse_id: shipment.to_warehouse_id, book_id: shipment.book_id)
-      inventory.current_inventory += shipment.quantity
-      inventory.save
+      if shipment.save
+        inventory = Inventory.find_by(warehouse_id: shipment.from_warehouse_id, book_id: shipment.book_id)
+        inventory.current_inventory -= shipment.quantity
+        inventory.save
 
-      render json: shipment.as_json
-    else
-      render json: shipment.errors.full_messages
+        inventory = Inventory.find_by(warehouse_id: shipment.to_warehouse_id, book_id: shipment.book_id)
+        inventory.current_inventory += shipment.quantity
+        inventory.save
+        render json: shipment.as_json
+      else
+        render json: shipment.errors.full_messages
+      end
     end
   end
 
