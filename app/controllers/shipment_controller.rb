@@ -46,7 +46,7 @@ class ShipmentController < ApplicationController
     shipment.to_warehouse_id = params[:to_warehouse_id]
     shipment.from_warehouse_id = params[:from_warehouse_id]
 
-    #delete the books in the shipment and calculate stock
+    #calculate stock
 
     shipment.book_shipments.each do |book|
       inventory = Inventory.find_by(warehouse_id: shipment.from_warehouse_id, book_id: book.book_id)
@@ -86,5 +86,26 @@ class ShipmentController < ApplicationController
     @shipment = Shipment.find_by(id: params[:id])
 
     render template: "shipments/show"
+  end
+
+  def destroy
+    shipment = Shipment.find_by(id: params[:id])
+
+    shipment.book_shipments.each do |book|
+      inventory = Inventory.find_by(warehouse_id: shipment.from_warehouse_id, book_id: book.book_id)
+      inventory.current_inventory += book.quantity
+
+      inventory.save
+
+      inventory = Inventory.find_by(warehouse_id: shipment.to_warehouse_id, book_id: book.book_id)
+      inventory.current_inventory -= book.quantity
+
+      inventory.save
+    end
+
+    shipment.destroy
+    # shipment.save
+
+    render json: { message: shipment }
   end
 end

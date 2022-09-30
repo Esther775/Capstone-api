@@ -61,6 +61,9 @@ Authorization: Bearer {{estherjwt}}
 
 get http://localhost:3000/shipments/127.json
 
+###Shipment Destroy
+delete http://localhost:3000/shipments/132.json
+
 ###
 #Inventory Show
-get http://localhost:3000/inventory/127
+get http://localhost:3000/inventory/128
