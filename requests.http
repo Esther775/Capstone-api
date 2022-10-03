@@ -1,5 +1,5 @@
 
-@estherjwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NjQ1NTU2ODN9.VqfprX5sAx9qMdnB0nSYQRiDWQvR7uhVww7CSLUfQmY
+@estherjwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NjQ5MDYxNTZ9.cwZDd3zoBhZnkola6HZiHebzFC3sp09x36R8vyVHz04
 ###
 # Create User
 post http://localhost:3000/user.json
@@ -46,7 +46,7 @@ Content-Type: application/json
 
 
 ###shipment update:
-patch http://localhost:3000/shipments/131
+patch http://localhost:3000/shipments/144
 Content-Type: application/json
 Authorization: Bearer {{estherjwt}}
 
@@ -65,5 +65,11 @@ get http://localhost:3000/shipments/127.json
 delete http://localhost:3000/shipments/132.json
 
 ###
+#Inventory Index
+get http://localhost:3000/inventory.json
+###
 #Inventory Show
-get http://localhost:3000/inventory/128
+get http://localhost:3000/inventory/1.json
+
+###Books Index
+get http://localhost:3000/books.json

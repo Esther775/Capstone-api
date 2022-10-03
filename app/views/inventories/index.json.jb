@@ -1,0 +1,10 @@
+@inventories.map do |inventory|
+  {
+    id: inventory.id,
+    book_id: inventory.book_id,
+    warehouse_id: inventory.warehouse_id,
+    current_inventory: inventory.current_inventory,
+    title: inventory.book,
+    warehouse: inventory.warehouse,
+  }
+end

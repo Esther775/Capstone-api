@@ -1,35 +1,39 @@
 class ShipmentController < ApplicationController
   def create
-    shipment = Shipment.new(
-      user_id: current_user.id,
-      from_warehouse_id: params[:from_warehouse_id],
-      to_warehouse_id: params[:to_warehouse_id],
-      comment: params[:comment],
-    )
-    shipment.save
-
-    params[:books].each do |individual_book|
-      book = BookShipment.new(
-        book_id: individual_book["book_id"],
-        quantity: individual_book["quantity"],
-        shipment_id: shipment.id,
+    if current_user
+      shipment = Shipment.new(
+        user_id: current_user.id,
+        from_warehouse_id: params[:from_warehouse_id],
+        to_warehouse_id: params[:to_warehouse_id],
+        comment: params[:comment],
       )
-      book.save
+      shipment.save
 
-      inventory = Inventory.find_by(warehouse_id: shipment.from_warehouse_id, book_id: book.book_id)
-      inventory.current_inventory -= book.quantity
+      params[:books].each do |individual_book|
+        book = BookShipment.new(
+          book_id: individual_book["book_id"],
+          quantity: individual_book["quantity"],
+          shipment_id: shipment.id,
+        )
+        book.save
 
-      inventory.save
+        inventory = Inventory.find_by(warehouse_id: shipment.from_warehouse_id, book_id: book.book_id)
+        inventory.current_inventory -= book.quantity
 
-      inventory = Inventory.find_by(warehouse_id: shipment.to_warehouse_id, book_id: book.book_id)
-      inventory.current_inventory += book.quantity
+        inventory.save
 
-      inventory.save
+        inventory = Inventory.find_by(warehouse_id: shipment.to_warehouse_id, book_id: book.book_id)
+        inventory.current_inventory += book.quantity
+
+        inventory.save
+      end
+
+      books_in_shipment = BookShipment.where(shipment_id: shipment.id)
+
+      render json: { shipment: shipment.as_json, books: books_in_shipment.as_json }
+    else
+      render json: { message: "Please Log In" }, status: 401
     end
-
-    books_in_shipment = BookShipment.where(shipment_id: shipment.id)
-
-    render json: { shipment: shipment.as_json, books: books_in_shipment.as_json }
   end
 
   def index
@@ -46,7 +50,7 @@ class ShipmentController < ApplicationController
     shipment.to_warehouse_id = params[:to_warehouse_id]
     shipment.from_warehouse_id = params[:from_warehouse_id]
 
-    #calculate stock
+    #delete all books in shipment and reduce inventory accordingly
 
     shipment.book_shipments.each do |book|
       inventory = Inventory.find_by(warehouse_id: shipment.from_warehouse_id, book_id: book.book_id)
@@ -59,9 +63,13 @@ class ShipmentController < ApplicationController
 
       inventory.save
     end
+    # p "*" * 50
+    # p shipment.book_shipments
+    shipment.book_shipments.destroy_all
+    # p "*" * 50
+    # p shipment.book_shipments
 
-    shipment.book_shipments.destroy
-
+    #recreate books in shipment, adjust stock accordingly
     params[:books].each do |individual_book|
       book = BookShipment.new(
         book_id: individual_book["book_id"],
@@ -80,6 +88,9 @@ class ShipmentController < ApplicationController
 
       inventory.save
     end
+
+    shipment.comment = params[:comment]
+    shipment.save
   end
 
   def show

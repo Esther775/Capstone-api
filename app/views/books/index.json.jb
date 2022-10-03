@@ -1,0 +1,7 @@
+@books.map do |book|
+  {
+    id: book.id,
+    title: book.title,
+    warehouse: book.inventories,
+  }
+end

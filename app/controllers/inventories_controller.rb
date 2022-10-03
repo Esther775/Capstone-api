@@ -1,7 +1,13 @@
 class InventoriesController < ApplicationController
-  def show
-    inventory = Inventory.where(warehouse_id: params[:id])
+  def index
+    @inventories = Inventory.all
 
-    render json: inventory.as_json
+    render template: "inventories/index"
+  end
+
+  def show
+    @inventory = Inventory.where(warehouse_id: params[:id])
+
+    render template: "inventories/show"
   end
 end

@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   patch "/shipments/:id" => "shipment#update"
   get "/shipments/:id" => "shipment#show"
   delete "/shipments/:id" => "shipment#destroy"
+  get "/inventory" => "inventories#index"
   get "/inventory/:id" => "inventories#show"
+  get "/books" => "books#index"
 end
