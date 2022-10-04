@@ -24,6 +24,10 @@ Content-Type: application/json
 
 #Warehouse index:
 get http://localhost:3000/warehouses.json
+###
+
+#Warehouse Show:
+get http://localhost:3000/warehouses/2.json
 Content-Type: application/json
 
 ###

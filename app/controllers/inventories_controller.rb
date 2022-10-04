@@ -6,8 +6,8 @@ class InventoriesController < ApplicationController
   end
 
   def show
-    @inventory = Inventory.where(warehouse_id: params[:id])
+    inventory = Inventory.where(warehouse_id: params[:id])
 
-    render template: "inventories/show"
+    render json: inventory.as_json
   end
 end

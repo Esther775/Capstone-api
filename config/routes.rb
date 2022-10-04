@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post "/user" => "users#create"
   post "/sessions" => "sessions#create"
   get "/warehouses" => "warehouse#index"
+  get "/warehouses/:id" => "warehouse#show"
   post "/shipments" => "shipment#create"
   get "/shipments" => "shipment#index"
   patch "/shipments/:id" => "shipment#update"
