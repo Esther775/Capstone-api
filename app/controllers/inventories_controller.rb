@@ -1,6 +1,6 @@
 class InventoriesController < ApplicationController
   def index
-    @inventories = Inventory.all
+    @inventories = Inventory.all.order("created_at DESC")
 
     render template: "inventories/index"
   end
