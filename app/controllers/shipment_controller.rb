@@ -63,11 +63,8 @@ class ShipmentController < ApplicationController
 
       inventory.save
     end
-    # p "*" * 50
-    # p shipment.book_shipments
+
     shipment.book_shipments.destroy_all
-    # p "*" * 50
-    # p shipment.book_shipments
 
     #recreate books in shipment, adjust stock accordingly
     params[:books].each do |individual_book|
