@@ -1,5 +1,5 @@
 
-@estherjwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NjQ5MDYxNTZ9.cwZDd3zoBhZnkola6HZiHebzFC3sp09x36R8vyVHz04
+@estherjwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NjU4NDM4MDV9.Yb1o7Q-vpH2nbbMhG_h5ylkeGWukXvE9Mg1Lf3fjTUo
 ###
 # Create User
 post http://localhost:3000/user.json
@@ -77,3 +77,37 @@ get http://localhost:3000/inventory/1.json
 
 ###Books Index
 get http://localhost:3000/books.json
+###
+# Prints Index
+get http://localhost:3000/prints.json
+
+###
+# Prints Create
+post http://localhost:3000/prints.json
+Content-Type: application/json
+Authorization: Bearer {{estherjwt}}
+
+
+{
+ "book_id": 3,
+ "quantity": 21,
+  "warehouse_id": 1
+}
+###
+#show print
+get http://localhost:3000/prints/1.json
+
+###
+#update Prints
+patch http://localhost:3000/prints/1.json
+Content-Type:  application/json
+Authorization: Bearer {{estherjwt}}
+
+{
+ "book_id": 3,
+ "quantity": 21,
+  "warehouse_id": 1
+}
+###
+#delete print
+delete http://localhost:3000/prints/1.json

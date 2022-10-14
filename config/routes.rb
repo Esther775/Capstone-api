@@ -16,4 +16,9 @@ Rails.application.routes.draw do
   get "/inventory" => "inventories#index"
   get "/inventory/:id" => "inventories#show"
   get "/books" => "books#index"
+  get "/prints" => "prints#index"
+  post "/prints" => "prints#create"
+  get "/prints/:id" => "prints#show"
+  patch "/prints/:id" => "prints#update"
+  delete "/prints/:id" => "prints#destroy"
 end
