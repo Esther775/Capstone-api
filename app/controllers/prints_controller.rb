@@ -34,6 +34,8 @@ class PrintsController < ApplicationController
     this_print.book_id = params[:book_id]
     this_print.warehouse_id = params[:warehouse_id]
 
+    this_print.save
+
     render json: this_print.as_json
   end
 

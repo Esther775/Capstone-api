@@ -1,5 +1,5 @@
 
-@estherjwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NjU4NDM4MDV9.Yb1o7Q-vpH2nbbMhG_h5ylkeGWukXvE9Mg1Lf3fjTUo
+@estherjwt = eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NjYzNjY5NjV9.BdY1f80gYfGtnDfb5MRLdNY62tqY9_T8c0IYESk7ppA
 ###
 # Create User
 post http://localhost:3000/user.json
@@ -99,13 +99,13 @@ get http://localhost:3000/prints/1.json
 
 ###
 #update Prints
-patch http://localhost:3000/prints/1.json
+patch http://localhost:3000/prints/4.json
 Content-Type:  application/json
 Authorization: Bearer {{estherjwt}}
 
 {
- "book_id": 3,
- "quantity": 21,
+ "book_id": 1,
+ "quantity": 2,
   "warehouse_id": 1
 }
 ###
